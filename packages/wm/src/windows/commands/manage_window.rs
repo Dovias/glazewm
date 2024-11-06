@@ -46,12 +46,12 @@ pub fn manage_window(
     // TODO: Log window details.
     info!("New window managed");
 
-
-    // Handle minimizing fullscreen window if another window container is being managed
+    // Handle minimizing fullscreen window if another non-floating window container is being managed
     if let Some(fullscreen_window) = window.workspace().unwrap().get_fullscreen_window() {
-      update_window_state(fullscreen_window, WindowState::Minimized, state, config)?;
+      if !matches!(window.state(), WindowState::Floating(_)) {
+        update_window_state(fullscreen_window, WindowState::Minimized, state, config)?;
+      }
     }
-
 
     state.emit_event(WmEvent::WindowManaged {
       managed_window: window.to_dto()?,

@@ -21,9 +21,11 @@ pub fn handle_window_minimize_ended(
       // TODO: Log window details.
       info!("Window minimize ended");
       
-      // Handle minimizing fullscreen window if another window container is having minimization ended
+      // Handle minimizing fullscreen window if another non-floating window container is ending being minimized
       if let Some(fullscreen_window) = window.workspace().unwrap().get_fullscreen_window() {
-        update_window_state(fullscreen_window, WindowState::Minimized, state, config)?;
+        if !matches!(window.state(), WindowState::Floating(_)) {
+          update_window_state(fullscreen_window, WindowState::Minimized, state, config)?;
+        }
       }
 
       let target_state = window

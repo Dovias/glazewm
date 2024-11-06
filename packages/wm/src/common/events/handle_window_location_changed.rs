@@ -26,6 +26,7 @@ pub fn handle_window_location_changed(
 
   // Update the window's state to be fullscreen or toggled from fullscreen.
   if let Some(window) = found_window {
+
     let old_frame_position = window.native().frame_position()?;
     let frame_position =
       try_warn!(window.native().refresh_frame_position());
