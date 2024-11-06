@@ -13,11 +13,11 @@ use crate::{
   containers::{
     traits::{CommonGetters, PositionGetters, TilingDirectionGetters},
     Container, ContainerDto, DirectionContainer, TilingContainer,
-    WindowContainer,
+    WindowContainer
   },
   impl_common_getters, impl_container_debug,
   impl_tiling_direction_getters,
-  user_config::{GapsConfig, WorkspaceConfig},
+  user_config::{GapsConfig, WorkspaceConfig}
 };
 
 #[derive(Clone)]
