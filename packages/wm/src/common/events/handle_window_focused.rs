@@ -30,13 +30,9 @@ pub fn handle_window_focused(
       return Ok(());
     }
 
-    // Handle minimizing focused fullscreen window if another window container was being focused
-    if let Some(focused_container) = window.workspace().unwrap().focused_container() {
-      if let Ok(focused_container) = focused_container.as_window_container() {        
-        if let WindowState::Fullscreen(_) = focused_container.state() {
-          update_window_state(focused_container, WindowState::Minimized, state, config)?;
-        }
-      }
+    // Handle minimizing focused fullscreen window if another window container is being focused
+    if let Some(fullscreen_window) = window.workspace().unwrap().get_fullscreen_window() {
+      update_window_state(fullscreen_window, WindowState::Minimized, state, config)?;
     }
     
     // TODO: Log window details.
